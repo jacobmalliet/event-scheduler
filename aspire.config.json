@@ -1,0 +1,23 @@
+{
+  "appHost": {
+    "path": "apphost.cs",
+    "language": "csharp"
+  },
+  "profiles": {
+    "https": {
+      "applicationUrl": "https://localhost:17187;http://localhost:15071",
+      "environmentVariables": {
+        "ASPIRE_DASHBOARD_OTLP_ENDPOINT_URL": "https://localhost:21019",
+        "ASPIRE_RESOURCE_SERVICE_ENDPOINT_URL": "https://localhost:22180"
+      }
+    },
+    "http": {
+      "applicationUrl": "http://localhost:15071",
+      "environmentVariables": {
+        "ASPIRE_DASHBOARD_OTLP_ENDPOINT_URL": "http://localhost:19179",
+        "ASPIRE_RESOURCE_SERVICE_ENDPOINT_URL": "http://localhost:20067",
+        "ASPIRE_ALLOW_UNSECURED_TRANSPORT": "true"
+      }
+    }
+  }
+}

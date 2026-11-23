@@ -1,0 +1,19 @@
+<Project>
+
+  <!-- Applies to every project under this folder, including the file-based apphost.cs. -->
+  <PropertyGroup>
+    <!-- Run .editorconfig code-style (IDExxxx) rules during build, not just in the IDE. -->
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <AnalysisLevel>latest</AnalysisLevel>
+
+    <!-- Required for IDE0005 (unnecessary usings) to report at build time. CS1591 is disabled in .editorconfig. -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+    <!-- Nullable reference type warnings are always errors. -->
+    <WarningsAsErrors>$(WarningsAsErrors);nullable</WarningsAsErrors>
+
+    <!-- In CI (CI=true, set by GitHub Actions and most CI systems) every warning fails the build. -->
+    <TreatWarningsAsErrors Condition="'$(CI)' == 'true'">true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+</Project>

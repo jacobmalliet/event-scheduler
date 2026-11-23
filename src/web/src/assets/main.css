@@ -1,0 +1,278 @@
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --text: #1c2024;
+  --muted: #60646c;
+  --border: #e0e1e6;
+  --accent: #3e63dd;
+  --accent-text: #ffffff;
+  --danger: #ce2c31;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111113;
+    --surface: #18191b;
+    --text: #edeef0;
+    --muted: #b0b4ba;
+    --border: #2e3135;
+    --accent: #7b9bff;
+    --accent-text: #111113;
+    --danger: #ff9592;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+}
+
+.site-header {
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  padding: 0.875rem 1rem;
+}
+
+.brand {
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.container.wide {
+  max-width: 1120px;
+}
+
+/* Events page: the "New event" form sits beside the list and stays in view while the list scrolls. */
+.events-layout {
+  display: grid;
+  grid-template-columns: minmax(300px, 380px) minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.events-sidebar {
+  position: sticky;
+  top: 1.5rem;
+}
+
+@media (max-width: 860px) {
+  .events-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .events-sidebar {
+    position: static;
+  }
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+
+h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.125rem;
+}
+
+a {
+  color: var(--accent);
+}
+
+.back {
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.form {
+  display: grid;
+  gap: 0.75rem;
+  /* Lets the form's layout respond to its own width (narrow sidebar, phone) rather than the screen's. */
+  container-type: inline-size;
+}
+
+/* Groups related inputs (e.g. date + time) that share one validation message. */
+.field-group {
+  display: grid;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.field-group .split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+/* In a very narrow form (e.g. a phone), the time input drops below the date instead of squeezing it. */
+@container (max-width: 320px) {
+  .field-group .split {
+    grid-template-columns: 1fr;
+  }
+}
+
+label {
+  display: grid;
+  /* Pack caption, input and error to the top instead of spreading them over any extra height. */
+  align-content: start;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+input,
+textarea {
+  font: inherit;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.5rem 0.625rem;
+  width: 100%;
+}
+
+/* A user-resized textarea can outgrow its card or the sticky form sidebar. */
+textarea {
+  resize: none;
+}
+
+button {
+  font: inherit;
+  justify-self: start;
+  background: var(--accent);
+  color: var(--accent-text);
+  border: 0;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.inline-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.inline-form button {
+  flex-shrink: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.5rem 0.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.error,
+.field-error {
+  color: var(--danger);
+}
+
+.field-error {
+  font-size: 0.8125rem;
+}
+
+.card-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.form .actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+button.secondary {
+  background: transparent;
+  color: var(--danger);
+  border: 1px solid var(--border);
+  padding: 0.25rem 0.625rem;
+  font-size: 0.875rem;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+}
+
+.pager button {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--border);
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+}

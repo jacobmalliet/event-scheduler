@@ -1,0 +1,6 @@
+dist
+coverage
+bin
+obj
+node_modules
+package-lock.json

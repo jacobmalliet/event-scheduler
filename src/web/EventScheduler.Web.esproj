@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/1.0.7204101">
+
+  <PropertyGroup>
+    <!-- Lets IDEs (Visual Studio, Rider) show the Vue app as a project in the solution. -->
+    <StartupCommand>npm run dev</StartupCommand>
+    <JavaScriptTestRoot>tests\</JavaScriptTestRoot>
+    <JavaScriptTestFramework>Vitest</JavaScriptTestFramework>
+
+    <!-- Aspire installs packages and runs Vite (see apphost.cs), so `dotnet build` of the solution
+         skips npm here to keep .NET builds and test runs fast. Use `npm run build` to build the SPA. -->
+    <ShouldRunNpmInstall>false</ShouldRunNpmInstall>
+    <ShouldRunBuildScript>false</ShouldRunBuildScript>
+    <BuildOutputFolder>$(MSBuildProjectDirectory)\dist</BuildOutputFolder>
+  </PropertyGroup>
+
+</Project>

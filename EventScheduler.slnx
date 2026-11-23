@@ -1,0 +1,19 @@
+<Solution>
+  <Folder Name="/Aspire/">
+    <File Path="apphost.cs" />
+    <File Path="apphost.run.json" />
+    <File Path="aspire.config.json" />
+    <Project Path="src/EventScheduler.ServiceDefaults/EventScheduler.ServiceDefaults.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/EventScheduler.Api/EventScheduler.Api.csproj" />
+    <Project Path="src/EventScheduler.Application/EventScheduler.Application.csproj" />
+    <Project Path="src/EventScheduler.Infrastructure/EventScheduler.Infrastructure.csproj" />
+    <Project Path="src/web/EventScheduler.Web.esproj" Type="JavaScript" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/EventScheduler.Api.Tests/EventScheduler.Api.Tests.csproj" />
+    <Project Path="tests/EventScheduler.Application.Tests/EventScheduler.Application.Tests.csproj" />
+    <Project Path="tests/EventScheduler.Infrastructure.Tests/EventScheduler.Infrastructure.Tests.csproj" />
+  </Folder>
+</Solution>

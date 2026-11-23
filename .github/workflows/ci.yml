@@ -1,0 +1,73 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+# A newer push to the same branch or PR cancels the run in progress.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    name: Backend (.NET)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: 10.0.x
+
+      # GitHub Actions sets CI=true, so Directory.Build.props treats every warning
+      # (including the .editorconfig code-style rules) as an error here.
+      - name: Restore
+        run: dotnet restore EventScheduler.slnx
+
+      - name: Build
+        run: dotnet build EventScheduler.slnx --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test EventScheduler.slnx --configuration Release --no-build
+
+      - name: Build Aspire AppHost
+        run: dotnet build apphost.cs
+
+  frontend:
+    name: Frontend (Vue)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: src/web
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: src/web/package-lock.json
+
+      - name: Install
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Check formatting
+        run: npm run format:check
+
+      - name: Type-check and build
+        run: npm run build
+
+      # Vitest browser mode runs the tests in a real (headless) Chromium via Playwright.
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Test
+        run: npm test
